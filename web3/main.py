@@ -22,6 +22,7 @@ from web3.personal import Personal
 from web3.testing import Testing
 from web3.txpool import TxPool
 from web3.version import Version
+from web3.trace import Trace
 
 from web3.providers.ipc import (
     IPCProvider,
