@@ -1,29 +1,26 @@
-from web3.utils.empty import (
-    empty,
+from web3.module import (
+    Module,
 )
 
-class Trace(object):
-    def __init__(self, web3):
-        self.web3 = web3
 
-    defaultAccount = empty
+class Trace(Module):
+
     defaultBlock = "latest"
 
     def call(self, transaction, types, block_identifier=None):
-        formatted_transaction = formatters.input_transaction_formatter(self, transaction)
         if block_identifier is None:
             block_identifier = self.defaultBlock
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_call",
             [
-                formatted_transaction,
+                transaction,
                 types,
-                formatters.input_block_identifier_formatter(block_identifier),
+                block_identifier,
             ],
         )
 
     def rawTransaction(self, rtransaction, types):
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_rawTransaction",
             [
                 rtransaction,
@@ -32,7 +29,7 @@ class Trace(object):
         )
 
     def replayTransaction(self, transaction, types):
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_replayTransaction",
             [
                 transaction,
@@ -43,15 +40,15 @@ class Trace(object):
     def block(self, block_identifier=None):
         if block_identifier is None:
             block_identifier = self.defaultBlock
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_block",
             [
-                formatters.input_block_identifier_formatter(block_identifier),
+                block_identifier,
             ],
         )
 
     def filter(self, tfilter):
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_filter",
             [
                 tfilter,
@@ -59,7 +56,7 @@ class Trace(object):
         )
 
     def get(self, transaction, indices):
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_get",
             [
                 transaction,
@@ -68,7 +65,7 @@ class Trace(object):
         )
 
     def transaction(self, transaction):
-        return self.web3._requestManager.request_blocking(
+        return self.web3.manager.request_blocking(
             "trace_transaction",
             [
                 transaction,

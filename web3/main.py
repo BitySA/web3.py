@@ -72,6 +72,7 @@ def get_default_modules():
         "admin": Admin,
         "parity": Parity,
         "testing": Testing,
+        "trace": Trace,
     }
 
 
